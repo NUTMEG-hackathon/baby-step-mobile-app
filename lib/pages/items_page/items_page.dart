@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:baby_step_up_app/model/model.dart';
-
+import 'package:baby_step_up_app/widgets/bottom_navigation_bar.dart';
 import 'cart_button.dart';
 import 'tile/item_tile.dart';
 
