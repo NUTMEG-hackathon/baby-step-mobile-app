@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:baby_step_up_app/pages/items_page/items_page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:baby_step_up_app/providers/providers.dart';
+import 'package:baby_step_up_app/pages/main_page/main_page.dart';
 
 // _viewsで表示させる画面を対応させる
 class BottomTabBar extends ConsumerWidget {
-  final _views = [ItemsPage(), ItemsPage(), Text('aaaa')];
+  final _views = [ItemsPage(), MainPage(), Text('aaaa')];
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

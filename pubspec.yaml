@@ -14,6 +14,8 @@ dependencies:
   freezed_annotation:
   hooks_riverpod: '>=1.0.0-0'
   simple_logger:
+  shared_preferences: ^2.0.6
+  swipebuttonflutter: ^1.0.0
 
 dev_dependencies:
   build_runner:
