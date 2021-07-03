@@ -16,3 +16,13 @@ final itemsFetcher = FutureProvider((ref) async {
   final list = json.map(ItemStock.fromJson).toList();
   return list;
 });
+
+final templatesListFetcher = FutureProvider((ref) async {
+  final result = await _client.get(
+    Uri.parse('http://localhost:3000/templates'),
+  );
+  final json =
+      (await jsonDecode(result.body) as List).cast<Map<String, dynamic>>();
+  final list = json.map(Template.fromJson).toList();
+  return list;
+});

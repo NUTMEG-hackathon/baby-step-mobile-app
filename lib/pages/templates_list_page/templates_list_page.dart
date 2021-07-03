@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:baby_step_up_app/model/model.dart';
 import 'package:baby_step_up_app/widgets/widgets.dart';
-
+import 'tile.dart';
 
 class TemplatesListPage extends StatelessWidget {
   const TemplatesListPage({Key? key}) : super(key: key);
@@ -24,38 +24,19 @@ class _TemplateListView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isLoading = false;
-    
-    return isLoading ? const Center(child: CircularProgressIndicator()) : ListView.builder(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      itemCount: 7,
-      itemBuilder: (_, index) => _Tile(id: index,)
-    );
+    final isLoading = ref.watch(templatesProvider.select((s) => s.isLoading));
+    final titles = ref
+        .watch(templatesProvider.select((s) => s.list.map((s) => s.title)))
+        .toList();
+
+    return isLoading
+        ? const Center(child: CircularProgressIndicator())
+        : ListView.builder(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            itemCount: titles.length,
+            itemBuilder: (_, index) => TemplateTile(
+                  title: titles[index],
+                ));
   }
 }
 
-class _Tile extends ConsumerWidget {
-  _Tile({
-    required this.id,
-  }) : super(key: ValueKey(id));
-
-  final int id;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Column(crossAxisAlignment: CrossAxisAlignment.stretch,
-    children: [
-      Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        height: 96,
-        child: Row(
-          children: [
-            Text('papipu')
-          ],
-        ),
-      ),
-      const Divider(indent: 10)
-    ],
-    );
-  }
-}
