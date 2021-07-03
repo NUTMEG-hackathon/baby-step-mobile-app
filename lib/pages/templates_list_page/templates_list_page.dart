@@ -4,7 +4,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:baby_step_up_app/model/model.dart';
 import 'package:baby_step_up_app/widgets/widgets.dart';
 
-
 class TemplatesListPage extends StatelessWidget {
   const TemplatesListPage({Key? key}) : super(key: key);
 
@@ -24,13 +23,19 @@ class _TemplateListView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isLoading = false;
-    
-    return isLoading ? const Center(child: CircularProgressIndicator()) : ListView.builder(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      itemCount: 7,
-      itemBuilder: (_, index) => _Tile(id: index,)
-    );
+    final isLoading = ref.watch(templatesProvider.select((s) => s.isLoading));
+    final ids = ref
+        .watch(templatesProvider.select((s) => s.list.map((s) => s.id)))
+        .toList();
+
+    return isLoading
+        ? const Center(child: CircularProgressIndicator())
+        : ListView.builder(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            itemCount: ids.length,
+            itemBuilder: (_, index) => _Tile(
+                  id: ids[index],
+                ));
   }
 }
 
@@ -43,19 +48,18 @@ class _Tile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Column(crossAxisAlignment: CrossAxisAlignment.stretch,
-    children: [
-      Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        height: 96,
-        child: Row(
-          children: [
-            Text('papipu')
-          ],
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          height: 96,
+          child: Row(
+            children: [Text('papipu')],
+          ),
         ),
-      ),
-      const Divider(indent: 10)
-    ],
+        const Divider(indent: 10)
+      ],
     );
   }
 }

@@ -21,22 +21,24 @@ class MainPage extends StatelessWidget {
             Align(
               alignment: Alignment(0.5, 0.8),
               child: SwipingButton(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  text: 'a',
-                  onSwipeCallback: onSwipeCallback,
-                ),
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                text: 'a',
+                onSwipeCallback: onSwipeCallback,
               ),
+            ),
           ]),
         ),
       ),
     );
   }
 
-  void onSwipeCallback() {
+  void onSwipeCallback() async {
     // APIを取得して描画しなおす
     // APIを取得しなおすことをcart_buttonを参考にやろう
     // stateで取得しなおすみたいなやつを作ればいい？
     print('hahahaha;');
+    var test = templatesListFetcher;
+    print(test);
   }
 }
 
