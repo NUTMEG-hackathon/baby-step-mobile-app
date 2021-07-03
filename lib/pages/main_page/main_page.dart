@@ -10,6 +10,10 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CupertinoNavigationBar(
+        backgroundColor: Color(0xfffeecd2),
+        middle: Text('ベイビーステップアップ'),
+      ),
       body: GestureDetector(
         child: Container(
           width: MediaQuery.of(context).size.width,
@@ -21,6 +25,9 @@ class MainPage extends StatelessWidget {
             Align(
               alignment: Alignment(0.5, 0.8),
               child: SwipingButton(
+                backgroundColor: Color(0xff91d0cd),
+                iconColor: Color(0xfffeecd2),
+                swipeButtonColor: Color(0xffe98a00),
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 text: 'a',
                 onSwipeCallback: onSwipeCallback,

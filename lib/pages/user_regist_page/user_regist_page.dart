@@ -16,6 +16,7 @@ class UserRegistPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       appBar: CupertinoNavigationBar(
+        backgroundColor: Color(0xfffeecd2),
         middle: Text('ユーザー登録'),
       ),
       body: SingleChildScrollView(
@@ -122,10 +123,12 @@ class _View extends ConsumerWidget {
 
                 final res = (await json.decode(result.body));
                 print(res);
-                setPrefs(res['data']['id']);
+                if (res['status'] != 'success') {
+                  throw ('error');
+                }
+                await setPrefs(res['data']['id'], res['data']['uid']);
               } catch (e) {
                 throw (e);
-                print('やりなおし');
               }
             },
             child: Text('登録'),

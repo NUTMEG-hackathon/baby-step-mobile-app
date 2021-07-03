@@ -11,8 +11,20 @@ class App extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
-      navigatorKey: ref.watch(navigatorKeyProvider),
-      home: BottomTabBar()
-    );
+        navigatorKey: ref.watch(navigatorKeyProvider),
+        theme: ThemeData(
+          scaffoldBackgroundColor: Color(0xfffeecd2),
+          accentColor: Color(0xff91d0cd),
+          primaryColor: Color(0xffe98a00),
+          bottomAppBarColor: Color(0xfffeecd2),
+          buttonTheme: ButtonThemeData(buttonColor: Color(0xffe98a00)),
+          dialogBackgroundColor: Color(0xffe98a00),
+          hintColor: Color(0xffe98a00),
+          iconTheme: IconThemeData(color: Color(0xffe98a00)),
+          primaryIconTheme: IconThemeData(color: Color(0xffe98a00)),
+          accentIconTheme: IconThemeData(color: Color(0xffe98a00)),
+          tabBarTheme: TabBarTheme(labelColor: Color(0xffe98a00)),
+        ),
+        home: BottomTabBar());
   }
 }

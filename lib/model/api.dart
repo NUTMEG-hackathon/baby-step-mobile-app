@@ -42,7 +42,11 @@ final userRegistFetcher = ((ref, body) async {
       headers: _headers,
       body: body);
 
-   final ex = (await jsonDecode(result.body)).cast<Map<String, dynamic>>();
+  final ex = (await jsonDecode(result.body)).cast<Map<String, dynamic>>();
 
   return result;
 });
+
+final postTime = (String time) async {
+  final result;
+};

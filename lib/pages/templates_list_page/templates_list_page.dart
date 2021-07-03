@@ -12,6 +12,7 @@ class TemplatesListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       appBar: CupertinoNavigationBar(
+        backgroundColor: Color(0xfffeecd2),
         middle: Text('テンプレート一覧'),
       ),
       body: _TemplateListView(),
@@ -39,4 +40,3 @@ class _TemplateListView extends ConsumerWidget {
                 ));
   }
 }
-
