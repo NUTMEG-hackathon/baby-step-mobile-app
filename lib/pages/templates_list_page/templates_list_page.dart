@@ -1,3 +1,4 @@
+import 'package:baby_step_up_app/pages/create_template_page/create_template_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -32,11 +33,27 @@ class _TemplateListView extends ConsumerWidget {
 
     return isLoading
         ? const Center(child: CircularProgressIndicator())
-        : ListView.builder(
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            itemCount: titles.length,
-            itemBuilder: (_, index) => TemplateTile(
+        : Stack(
+            children: [
+              ListView.builder(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                itemCount: titles.length,
+                itemBuilder: (_, index) => TemplateTile(
                   title: titles[index],
-                ));
+                ),
+              ),
+              Align(
+                alignment: Alignment(0.8, 0.9),
+                child: FloatingActionButton(
+                  onPressed: () => Navigator.of(context).push<void>(
+                      CupertinoPageRoute<void>(
+                          builder: (context) => const CreateTemplatePage(),
+                          fullscreenDialog: true)),
+                  backgroundColor: Color(0xffe98a00),
+                  child: Icon(Icons.add),
+                ),
+              ),
+            ],
+          );
   }
 }

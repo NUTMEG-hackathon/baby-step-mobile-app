@@ -31,6 +31,17 @@ final templatesListFetcher = FutureProvider((ref) async {
   return list;
 });
 
+final stepsListFetcher = FutureProvider((ref) async {
+  print('api');
+  final result = await _client.get(
+    Uri.parse('http://localhost:3000/template/id'),
+  );
+  final json =
+      (await jsonDecode(result.body) as List).cast<Map<String, dynamic>>();
+  final list = json.map(Step.fromJson).toList();
+  return list;
+});
+
 final userRegistFetcher = ((ref, body) async {
   print('api');
   print(body);
