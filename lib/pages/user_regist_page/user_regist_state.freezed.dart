@@ -17,10 +17,10 @@ class _$UserRegistStateTearOff {
   const _$UserRegistStateTearOff();
 
   _UserRegistState call(
-      {String name = '',
-      String email = '',
-      String password = '',
-      String passwordConfirm = ''}) {
+      {required String name,
+      required String email,
+      required String password,
+      required String passwordConfirm}) {
     return _UserRegistState(
       name: name,
       email: email,
@@ -145,22 +145,18 @@ class __$UserRegistStateCopyWithImpl<$Res>
 
 class _$_UserRegistState extends _UserRegistState {
   _$_UserRegistState(
-      {this.name = '',
-      this.email = '',
-      this.password = '',
-      this.passwordConfirm = ''})
+      {required this.name,
+      required this.email,
+      required this.password,
+      required this.passwordConfirm})
       : super._();
 
-  @JsonKey(defaultValue: '')
   @override
   final String name;
-  @JsonKey(defaultValue: '')
   @override
   final String email;
-  @JsonKey(defaultValue: '')
   @override
   final String password;
-  @JsonKey(defaultValue: '')
   @override
   final String passwordConfirm;
 
@@ -201,10 +197,10 @@ class _$_UserRegistState extends _UserRegistState {
 
 abstract class _UserRegistState extends UserRegistState {
   factory _UserRegistState(
-      {String name,
-      String email,
-      String password,
-      String passwordConfirm}) = _$_UserRegistState;
+      {required String name,
+      required String email,
+      required String password,
+      required String passwordConfirm}) = _$_UserRegistState;
   _UserRegistState._() : super._();
 
   @override

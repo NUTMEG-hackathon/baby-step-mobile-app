@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'package:baby_step_up_app/util/shared_preferences.dart';
+import 'package:http/http.dart';
+
 import 'package:baby_step_up_app/pages/user_regist_page/user_regist_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -67,7 +71,7 @@ class _View extends ConsumerWidget {
               labelText: 'パスワード',
             ),
             onChanged: (v) {
-              print(v);
+              controller.setPassword(v);
             },
             onEditingComplete: () {
               controller.setName;
@@ -86,17 +90,43 @@ class _View extends ConsumerWidget {
               return v!.isEmpty ? '入力して下さい' : null;
             },
             onChanged: (v) {
-              controller.setEmail(v);
+              controller.setPasswordConfirm(v);
             },
           ),
           SizedBox(
             height: 50,
           ),
           ElevatedButton(
-            onPressed: () {
-              print(controller.state.name);
-              print(controller.state.email);
-              print(controller.state.passwordConfirm);
+            onPressed: () async {
+              try {
+                final Map<String, String> _headers = {
+                  'content-type': 'application/json'
+                };
+
+                final _client = Client();
+
+                String body = json.encode({
+                  'name': controller.state.name,
+                  'email': controller.state.email,
+                  'password': controller.state.password,
+                  'password_confirmation': controller.state.passwordConfirm
+                });
+
+                print(body);
+                final result = await _client.post(
+                    Uri.parse(
+                      'http://localhost:3000/api/auth',
+                    ),
+                    headers: _headers,
+                    body: body);
+
+                final res = (await json.decode(result.body));
+                print(res);
+                setPrefs(res['data']['id']);
+              } catch (e) {
+                throw (e);
+                print('やりなおし');
+              }
             },
             child: Text('登録'),
           ),

@@ -20,18 +20,14 @@ class UserRegistController extends StateNotifier<UserRegistState> {
           passwordConfirm: '',
         ));
 
-  void setName(name) {
-    state = state.copyWith(name: name);
-    print('name');
-    print(name);
-  }
+  void setName(name) => state = state.copyWith(name: name);
 
   void setEmail(email) => state = state.copyWith(email: email);
 
   void setPassword(password) => state = state.copyWith(password: password);
 
   void setPasswordConfirm(passwordConfirm) =>
-      state = state.copyWith(email: passwordConfirm);
+      state = state.copyWith(passwordConfirm: passwordConfirm);
 
   @override
   void dispose() {
