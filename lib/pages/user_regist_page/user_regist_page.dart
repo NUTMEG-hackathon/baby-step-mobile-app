@@ -110,7 +110,10 @@ class _View extends ConsumerWidget {
                   'name': controller.state.name,
                   'email': controller.state.email,
                   'password': controller.state.password,
-                  'password_confirmation': controller.state.passwordConfirm
+                  'password_confirmation': controller.state.passwordConfirm,
+                  "select_template": 0,
+                  "doing_step": 0,
+                  "reset_time": "12:00"
                 });
 
                 print(body);
@@ -126,7 +129,7 @@ class _View extends ConsumerWidget {
                 if (res['status'] != 'success') {
                   throw ('error');
                 }
-                await setPrefs(res['data']['id'], res['data']['uid']);
+                await setPrefs(res['data']['id']);
               } catch (e) {
                 throw (e);
               }

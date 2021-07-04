@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:baby_step_up_app/pages/user_regist_page/user_regist_controller.dart';
+import 'package:baby_step_up_app/util/shared_preferences.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart';
 
@@ -59,5 +60,14 @@ final userRegistFetcher = ((ref, body) async {
 });
 
 final postTime = (String time) async {
-  final result;
+  print('testtest');
+  final id = await getPrefs();
+  final body = json.encode({"user_id": id, "reset_time": time});
+
+  final result = await _client.put(
+      Uri.parse('http://localhost:3000/api/v1/users/update_reset_time'),
+      headers: _headers,
+      body: body);
+
+  return 'success';
 };

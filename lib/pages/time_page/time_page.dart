@@ -9,6 +9,9 @@ import 'package:baby_step_up_app/widgets/widgets.dart';
 import 'dart:async';
 import 'package:intl/intl.dart';
 import 'package:date_time_picker/date_time_picker.dart';
+import 'dart:convert';
+import 'package:http/http.dart';
+import 'package:baby_step_up_app/util/shared_preferences.dart';
 
 class TimePage extends StatelessWidget {
   const TimePage({Key? key}) : super(key: key);
@@ -39,17 +42,44 @@ class _View extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller = ref.watch(userRegistProvider.notifier);
+    final Map<String, String> _headers = {'content-type': 'application/json'};
+    final _client = Client();
 
     return Container(
       padding: const EdgeInsets.all(50),
       child: GestureDetector(
         child: DateTimePicker(
           type: DateTimePickerType.time,
+          initialTime: TimeOfDay(hour: 10, minute: 10),
           timeLabelText: "time",
-          onChanged: (v) => print(v),
+          onChanged: (v) async {
+            final id = await getPrefs();
+            final body = json.encode({"user_id": id, "reset_time": v});
+
+            final result = await _client.put(
+                Uri.parse(
+                    'http://localhost:3000/api/v1/users/update_reset_time'),
+                headers: _headers,
+                body: body);
+          },
         ),
       ),
     );
+  }
+
+  GetTime() async {
+    final Map<String, String> _headers = {'content-type': 'application/json'};
+    final client = Client();
+    final id = await getPrefs();
+    final body = json.encode({"user_id": id});
+
+    final result = await client.get(
+      Uri.parse(
+          "http://localhost:3000/api/v1/users/get_reset_time?user_id=" + id),
+      headers: _headers,
+    );
+
+    final res = await json.decode(result.body);
+    return res["reset_time"];
   }
 }
